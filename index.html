@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flavor Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Order Your Drink</h1>
+        
+        <label>Pick a Size:</label>
+        <select id="sizeDropdown">
+            <option value="Small">Small ($1.50)</option>
+            <option value="Large">Large ($2.00)</option>
+        </select>
+
+        <label>Pick a Flavour:</label>
+        <select id="flavourDropdown">
+            <option value="Vanilla">Vanilla</option>
+            <option value="Caramel">Caramel</option>
+            <option value="Chocolate">Chocolate</option>
+        </select>
+
+        <div class="extras">
+            <label><input type="checkbox" id="sprinkles"> Add Sprinkles (+$0.50)</label>
+            <label><input type="checkbox" id="whippedCream"> Whipped Cream (+$0.75)</label>
+        </div>
+
+        <button id="calculateButton">Calculate Total</button>
+
+        <img id="drinkImage" src="" style="width:150px; display:none; margin: 10px auto;">
+
+        <div id="orderoutput" class="output-box">
+            Your order details will appear here...
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
