@@ -1,50 +1,70 @@
-// 1. SELECT THE ELEMENTS
+// SELECT THE ELEMENTS
 const calculateBtn = document.getElementById("calculateButton");
 const outputDiv = document.getElementById("orderoutput");
 const img = document.getElementById("drinkImage"); 
 
-calculateBtn.addEventListener("click", function() {
-    // 2. GET VALUES
-    const size = document.getElementById("sizeDropdown").value;
-    const flavour = document.getElementById("flavourDropdown").value;
+calculateBtn.addEventListener("click", calculateTotal);
+
+function calculateTotal() {
+    const size = getSize();
+    const flavour = getFlavour();
+    const extras = getExtras();
     
-    // Check if checkboxes are checked
+    if (!size || !flavour) {
+        alert("Please select both size and flavor.");
+        return;
+    }
+
+    const price = calculatePrice(size, extras);
+    updateImage(flavour);
+    displayOutput(size, flavour, extras, price);
+}
+
+// Get selected size
+function getSize() {
+    return document.getElementById("sizeDropdown").value || null;
+}
+
+// Get selected flavour
+function getFlavour() {
+    return document.getElementById("flavourDropdown").value || null;
+}
+
+// Get selected extras
+function getExtras() {
     const hasSprinkles = document.getElementById("sprinkles").checked;
     const hasWhippedCream = document.getElementById("whippedCream").checked;
+    
+    const extras = [];
+    if (hasSprinkles) extras.push("Sprinkles ($0.50)");
+    if (hasWhippedCream) extras.push("Whipped Cream ($0.75)");
+    
+    return extras;
+}
 
-    // 3. MATH LOGIC
-    let price = 1.50;
-    let extrasList = ""; // To track what extras were added
+// Calculate the total price
+function calculatePrice(size, extras) {
+    let basePrice = size === "Large" ? 2.00 : 1.50;
+    if (extras.includes("Sprinkles ($0.50)")) basePrice += 0.50;
+    if (extras.includes("Whipped Cream ($0.75)")) basePrice += 0.75;
+    return basePrice;
+}
 
-    if (size === "Large") { 
-        price = 2.00; 
-    }
-
-    if (hasSprinkles) {
-        price += 0.50;
-        extrasList += " + Sprinkles ($0.50)";
-    }
-
-    if (hasWhippedCream) {
-        price += 0.75;
-        extrasList += " + Whipped Cream ($0.75)";
-    }
-
-    // 4. IMAGE LOGIC
-    if (flavour === "Vanilla") {
-        img.src = "vanilla.jpg"; 
-    } else if (flavour === "Caramel") {
-        img.src = "caramel.jpg";
-    } else if (flavour === "Chocolate") {          
-        img.src = "chocolate.jpg";
-    }
+// Update the image based on the selected flavour
+function updateImage(flavour) {
+    const flavourImages = {
+        "Vanilla": "vanilla.jpg",
+        "Caramel": "caramel.jpg",
+        "Chocolate": "chocolate.jpg"
+    };
+    
+    img.src = flavourImages[flavour];
     img.style.display = "block";
+}
 
-    // 5. OUTPUT
-    const output = `Size: ${size}
-    Flavour: ${flavour}
-    Extras: ${extrasList || "None"}
-    Total Price: $${price.toFixed(2)}`;
-
+// Display the output in the output box
+function displayOutput(size, flavour, extras, price) {
+    const extrasList = extras.length ? extras.join(", ") : "None";
+    const output = `Size: ${size}\nFlavour: ${flavour}\nExtras: ${extrasList}\nTotal Price: $${price.toFixed(2)}`;
     outputDiv.innerText = output;
-});
+}

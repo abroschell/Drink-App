@@ -4,6 +4,7 @@ body {
     display: flex;
     justify-content: center;
     padding-top: 50px;
+    margin: 0;
 }
 
 .card {
@@ -11,7 +12,13 @@ body {
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    width: 300px;
+    width: 90%;
+    max-width: 400px; /* Responsive design */
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.02); /* Scale effect on hover */
 }
 
 label {
@@ -26,6 +33,11 @@ select, button {
     margin-top: 8px;
     border-radius: 8px;
     border: 1px solid #ddd;
+    transition: border-color 0.3s;
+}
+
+select:focus, button:focus {
+    border-color: #330551; /* Changes border color on focus */
 }
 
 button {
@@ -34,18 +46,16 @@ button {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
     background-color: #2d0739;
 }
 
-
 button:active {
     transform: scale(0.95);
 }
-
 
 #orderoutput {
     transition: all 0.5s ease;

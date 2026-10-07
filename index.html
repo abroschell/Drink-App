@@ -1,37 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flavor Shop</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <div class="card">
-        <h1>Order Your Drink</h1>
-        
-        <label>Pick a Size:</label>
-        <select id="sizeDropdown">
-            <option value="Small">Small ($1.50)</option>
-            <option value="Large">Large ($2.00)</option>
-        </select>
+    <div class="container">
+        <div class="card">
+            <h1>Order Your Drink</h1>
 
-        <label>Pick a Flavour:</label>
-        <select id="flavourDropdown">
-            <option value="Vanilla">Vanilla</option>
-            <option value="Caramel">Caramel</option>
-            <option value="Chocolate">Chocolate</option>
-        </select>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="sizeDropdown"><i class="fas fa-glass-martini-alt"></i> Pick a Size:</label>
+                    <select id="sizeDropdown" aria-required="true">
+                        <option value="" disabled selected>Select size</option>
+                        <option value="Small">Small ($1.50)</option>
+                        <option value="Large">Large ($2.00)</option>
+                    </select>
+                </div>
 
-        <div class="extras">
-            <label><input type="checkbox" id="sprinkles"> Add Sprinkles (+$0.50)</label>
-            <label><input type="checkbox" id="whippedCream"> Whipped Cream (+$0.75)</label>
-        </div>
+                <div class="form-group">
+                    <label for="flavourDropdown"><i class="fas fa-coffee"></i> Pick a Flavour:</label>
+                    <select id="flavourDropdown" aria-required="true">
+                        <option value="" disabled selected>Select flavour</option>
+                        <option value="Vanilla">Vanilla</option>
+                        <option value="Caramel">Caramel</option>
+                        <option value="Chocolate">Chocolate</option>
+                    </select>
+                </div>
 
-        <button id="calculateButton">Calculate Total</button>
+                <div class="extras form-group">
+                    <label><input type="checkbox" id="sprinkles"> <i class="fas fa-snowflake"></i> Add Sprinkles (+$0.50)</label>
+                    <label><input type="checkbox" id="whippedCream"> <i class="fas fa-asterisk"></i> Whipped Cream (+$0.75)</label>
+                </div>
 
-        <img id="drinkImage" src="" style="width:150px; display:none; margin: 10px auto;">
+                <button type="button" id="calculateButton">Calculate Total</button>
+                
+                <img id="drinkImage" src="" alt="Your drink image" style="width:150px; display:none; margin: 10px auto;">
 
-        <div id="orderoutput" class="output-box">
-            Your order details will appear here...
+                <div id="orderoutput" class="output-box">
+                    Your order details will appear here...
+                </div>
+            </form>
         </div>
     </div>
 
